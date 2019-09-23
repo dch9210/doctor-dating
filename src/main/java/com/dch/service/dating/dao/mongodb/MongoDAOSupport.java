@@ -7,9 +7,7 @@ import com.dch.service.dating.common.util.Exceptions;
 import com.dch.service.dating.common.util.GenericsUtils;
 import com.dch.service.dating.common.util.ObjectIdUtils;
 import com.dch.service.dating.dao.mongodb.doc.BasicMongoDocument;
-import com.mongodb.WriteResult;
 import com.mongodb.client.result.UpdateResult;
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -235,18 +233,19 @@ public abstract class MongoDAOSupport<T extends BasicMongoDocument> {
      * 校验@NotNull注解的字段是否为null，是则报错
      */
     private void assertFieldNotNull(T t) {
-        Field[] fields = entityClass.getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(NotNull.class)) {
-                field.setAccessible(true);
-                try {
-                    AssertHelper.assertNotNull(field.get(t), entityClass.getSimpleName().concat(" ").concat(field.getName().concat("字段不能为null")));
-                } catch (IllegalAccessException e) {
-                    log.error(entityClass.getSimpleName().concat("assertFieldNotNull method throw IllegalAccessException"));
-                    e.printStackTrace();
-                }
-            }
-        }
+        AssertHelper.assertNotEmpty(t);
+//        Field[] fields = entityClass.getDeclaredFields();
+//        for (Field field : fields) {
+//            if (field.isAnnotationPresent(Notnull.class)) {
+//                field.setAccessible(true);
+//                try {
+//                    AssertHelper.assertNotNull(field.get(t), entityClass.getSimpleName().concat(" ").concat(field.getName().concat("字段不能为null")));
+//                } catch (IllegalAccessException e) {
+//                    log.error(entityClass.getSimpleName().concat("assertFieldNotNull method throw IllegalAccessException"));
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
 
 }

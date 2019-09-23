@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://192.168.2.82:3717/doctor_dating
+#      password: guest
+#      username: guest
+
+server:
+  port: 80
+  servlet:
+    context-path: /doctor-dating

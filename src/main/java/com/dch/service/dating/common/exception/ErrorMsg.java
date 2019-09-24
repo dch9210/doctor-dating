@@ -3,6 +3,10 @@ package com.dch.service.dating.common.exception;
 public enum ErrorMsg {
     DB_SAVE_NULL(1, "DB save data cannot be null."),
     DB_PARAM_INVALID(2, "数据库执行参数校验失败."),
+    API_INVALID_QUERY(3, "请求参数错误."),
+
+    USERS_EXISTS(4, "该手机号已被注册."),
+    TEL_INVALID(5, "手机号格式不正确."),
     ;
     private int code;
     private String msg;

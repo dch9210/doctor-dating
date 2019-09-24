@@ -1,12 +1,17 @@
 package com.dch.service.dating.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class Users {
+@ApiModel
+public class Users extends BaseModel{
 
+    @ApiModelProperty(value = "电话号码")
     private String tel;
 
+    @ApiModelProperty(value = "密码")
     private String pwd;
 
 }

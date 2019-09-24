@@ -47,7 +47,14 @@ public class UsersService {
         return genUsers(usersDocument);
     }
 
+    public Users getUsersByTelAndPwd(String tel, String pwd) {
+        UsersDocument usersDocument = usersDAO.getUsers(tel, pwd);
+        return genUsers(usersDocument);
+    }
+
     private Users genUsers(UsersDocument usersDocument) {
+        if(AssertHelper.isEmpty(usersDocument))
+            return null;
         Users users = new Users();
         users.setId(usersDocument.get_id());
         users.setCreatetime(usersDocument.getCreateTime());

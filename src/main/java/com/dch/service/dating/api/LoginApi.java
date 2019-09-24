@@ -1,5 +1,8 @@
 package com.dch.service.dating.api;
 
+import com.dch.service.dating.common.exception.ErrorMsg;
+import com.dch.service.dating.common.util.AssertHelper;
+import com.dch.service.dating.common.util.Exceptions;
 import com.dch.service.dating.entity.Users;
 import com.dch.service.dating.service.UsersService;
 import io.swagger.annotations.Api;
@@ -42,6 +45,18 @@ public class LoginApi {
         Users result = usersService.registNewUser(users);
         session.setAttribute("_SIGN_USERS", result);
         return result;
+    }
+
+    @ApiOperation(value = "登录", notes = "必填手机号+密码")
+    @PostMapping("/in")
+    public Users login(Users users, HttpSession session) {
+        if(AssertHelper.isEmpty(users))
+            Exceptions.throwss(ErrorMsg.API_INVALID_QUERY);
+        users = usersService.getUsersByTelAndPwd(users.getTel(), users.getPwd());
+        if(AssertHelper.isEmpty(users))
+            Exceptions.throwss(ErrorMsg.NONE_USERS);
+        session.setAttribute("_SIGN_USERS", users);
+        return users;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.dch.service.dating.entity;
 
+import com.dch.service.dating.dao.mongodb.enums.UsersType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,5 +24,8 @@ public class Users extends BaseModel{
 
     @ApiModelProperty("性别")
     private String gender;
+
+    @ApiModelProperty("用户类型")
+    private UsersType type;
 
 }

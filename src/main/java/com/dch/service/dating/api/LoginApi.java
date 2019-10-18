@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +42,7 @@ public class LoginApi {
 
     @ApiOperation(value = "注册新用户", notes = "必填手机号+密码")
     @PostMapping("/up")
-    public Users registUser(Users users, HttpServletRequest request, HttpSession session) {
+    public Users registUser(@RequestBody Users users, HttpServletRequest request, HttpSession session) {
         Users result = usersService.registNewUser(users);
         session.setAttribute("_SIGN_USERS", result);
         return result;
@@ -49,7 +50,7 @@ public class LoginApi {
 
     @ApiOperation(value = "登录", notes = "必填手机号+密码")
     @PostMapping("/in")
-    public Users login(Users users, HttpSession session) {
+    public Users login(@RequestBody Users users, HttpSession session) {
         if(AssertHelper.isEmpty(users))
             Exceptions.throwss(ErrorMsg.API_INVALID_QUERY);
         users = usersService.getUsersByTelAndPwd(users.getTel(), users.getPwd());

@@ -7,7 +7,7 @@ public enum ErrorMsg {
 
     USERS_EXISTS(4, "该手机号已被注册."),
     TEL_INVALID(5, "手机号格式不正确."),
-    NONE_USERS(5, "该用户不存在."),
+    NONE_USERS(5, "用户名或密码输入错误."),
     ;
     private int code;
     private String msg;

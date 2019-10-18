@@ -5,9 +5,9 @@ import com.dch.service.dating.common.util.AssertHelper;
 import com.dch.service.dating.common.util.Exceptions;
 import com.dch.service.dating.dao.mongodb.UsersDAO;
 import com.dch.service.dating.dao.mongodb.doc.UsersDocument;
+import com.dch.service.dating.dao.mongodb.enums.UsersType;
 import com.dch.service.dating.entity.Users;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +43,9 @@ public class UsersService {
         usersDocument = new UsersDocument();
         usersDocument.setTel(users.getTel());
         usersDocument.setPwd(users.getPwd());
+        usersDocument.setName(users.getName());
+        usersDocument.setGender(users.getGender());
+        usersDocument.setType(UsersType.PATIENT);
         usersDAO.save(usersDocument);
         return genUsers(usersDocument);
     }
@@ -61,6 +64,9 @@ public class UsersService {
         users.setModifyTime(usersDocument.getModifyTime());
         users.setTel(usersDocument.getTel());
         users.setPwd(usersDocument.getPwd());
+        users.setName(usersDocument.getName());
+        users.setTel(usersDocument.getTel());
+        users.setType(usersDocument.getType());
         return users;
     }
 

@@ -15,4 +15,10 @@ public class UsersDocument extends BasicMongoDocument{
     // 用户类型
     private UsersType type;
 
+    // 姓名
+    private String name;
+
+    // 性别
+    private String gender;
+
 }

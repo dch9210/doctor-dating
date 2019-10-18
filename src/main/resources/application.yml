@@ -1,7 +1,10 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://120.78.86.120:3717/doctor_dating
+      database: doctor-dating
+      host: localhost
+      port: 27017
+#      uri: mongodb://localhost:27017/dating
 #      password: guest
 #      username: guest
 

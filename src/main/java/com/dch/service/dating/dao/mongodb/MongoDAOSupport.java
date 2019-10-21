@@ -48,6 +48,11 @@ public abstract class MongoDAOSupport<T extends BasicMongoDocument> {
         return getMongoTemplate().findOne(query, entityClass, collectionName());
     }
 
+    public T getById(String id) {
+        Query query = new Query(Criteria.where("_id").is(id));
+        return get(query);
+    }
+
     public List<T> getByIds(Collection<String> ids) {
         if (CollectionUtils.isEmpty(ids)) {
             return new ArrayList<>();

@@ -7,5 +7,6 @@ public class DBConstants {
     public static final int DEL_FLAG_FALSE = 0;
 
     public static final String TALBE_NAME_USERS = "users";
+    public static final String TALBE_NAME_DOCTOR_SCHEDU = "doctor_schedu";
 
 }

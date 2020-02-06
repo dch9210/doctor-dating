@@ -1,5 +1,6 @@
 package com.dch.service.dating.api;
 
+import com.dch.service.dating.common.ApiResult;
 import com.dch.service.dating.common.exception.ErrorMsg;
 import com.dch.service.dating.common.util.AssertHelper;
 import com.dch.service.dating.common.util.Exceptions;
@@ -34,30 +35,30 @@ public class LoginApi {
 
     @ApiOperation(value = "根据电话号码获取用户信息", notes = "测试数据")
     @GetMapping("/users/test")
-    public Users getUsersTest(String tel) {
+    public ApiResult getUsersTest(String tel) {
         log.debug("LoginApi getUsersTest param tel {}", tel);
         Users users = usersService.getUserByTelForTest(tel);
-        return users;
+        return ApiResult.ok(users);
     }
 
     @ApiOperation(value = "注册新用户", notes = "必填手机号+密码")
     @PostMapping("/up")
-    public Users registUser(@RequestBody Users users, HttpServletRequest request, HttpSession session) {
+    public ApiResult registUser(@RequestBody Users users, HttpServletRequest request, HttpSession session) {
         Users result = usersService.registNewUser(users);
         session.setAttribute("_SIGN_USERS", result);
-        return result;
+        return ApiResult.ok(result);
     }
 
     @ApiOperation(value = "登录", notes = "必填手机号+密码")
     @PostMapping("/in")
-    public Users login(@RequestBody Users users, HttpSession session) {
+    public ApiResult login(@RequestBody Users users, HttpSession session) {
         if(AssertHelper.isEmpty(users))
             Exceptions.throwss(ErrorMsg.API_INVALID_QUERY);
         users = usersService.getUsersByTelAndPwd(users.getTel(), users.getPwd());
         if(AssertHelper.isEmpty(users))
             Exceptions.throwss(ErrorMsg.NONE_USERS);
         session.setAttribute("_SIGN_USERS", users);
-        return users;
+        return ApiResult.ok(users);
     }
 
 }
